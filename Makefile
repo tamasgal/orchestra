@@ -26,7 +26,7 @@ SRC_TEST_LIST = $(wildcard $(SRC_TEST_DIR)/test_*.cpp)
 
 .PHONY:  test clean
 
-$(PROGNAME): $(SRC_DIR)/$(PROGNAME).cpp
+$(BIN_DIR)/$(PROGNAME): $(SRC_DIR)/$(PROGNAME).cpp
 	@echo Nothing to build...
 	gcc $(CFLAGS) $? -o $@
 
