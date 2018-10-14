@@ -1,5 +1,6 @@
 PROGNAME = orchestra
-CFLAGS = -Wall -std=c++11 -lrabbitmq
+CFLAGS = -Wall -std=c++11
+LIBS = -lrabbitmq
 CC = g++
 RM = /bin/rm -f
 
@@ -24,7 +25,7 @@ $(BUILD_DIR)/catch.o: $(SRC_TEST_DIR)/catch.cpp
 	${CC} ${CFLAGS} -c $? -o $@
 
 $(BIN_DIR)/test_$(PROGNAME): $(BUILD_DIR)/catch.o $(SRC_TEST_LIST) 
-	$(CC) $(CFLAGS) $? -o $@
+	$(CC) $(CFLAGS) $(LIBS) $? -o $@
 
 clean:
 	${RM} ${BIN_DIR}/*
