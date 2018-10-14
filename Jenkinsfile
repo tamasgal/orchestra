@@ -37,6 +37,7 @@ node('master') {
                 try {
                     sh """
                         make test
+                        make junit.xml
                     """
                     updateGitlabCommitStatus name: 'test', state: 'success'
                 } catch (e) {
@@ -44,6 +45,16 @@ node('master') {
                     updateGitlabCommitStatus name: 'test', state: 'failed'
                     throw e
                 }
+                step([$class: 'XUnitBuilder',
+                        thresholds: [
+                            [$class: 'SkippedThreshold', failureThreshold: '5'],
+                            [$class: 'FailedThreshold', failureThreshold: '0']
+                        ],
+                        tools: [
+                            [$class: 'JUnitType', pattern: 'junit.xml']
+                        ]
+                    ]
+                )
             }
         }
     }
