@@ -17,6 +17,9 @@ all:
 test: $(BIN_DIR)/test_$(PROGNAME)
 	$(BIN_DIR)/test_$(PROGNAME)
 
+junit.xml: $(BIN_DIR)/test_$(PROGNAME)
+	$(BIN_DIR)/test_$(PROGNAME) -r junit > $@
+
 $(BUILD_DIR)/catch.o: $(SRC_TEST_DIR)/catch.cpp
 	${CC} ${CFLAGS} -c $? -o $@
 
