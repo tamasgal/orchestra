@@ -1,5 +1,5 @@
 PROGNAME = orchestra
-CFLAGS = -Wall -std=c++11
+CFLAGS = -Wall -std=c++11 -lrabbitmq
 CC = g++
 RM = /bin/rm -f
 
