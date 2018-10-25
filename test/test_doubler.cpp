@@ -13,4 +13,5 @@ TEST_CASE( "Doubler doubles", "[doubler]" ) {
 
 TEST_CASE( "Orchestra", "[orchestra]" ) {
     REQUIRE(3 == orch::add(1, 2));
+    REQUIRE(4 == orch::add(1, 3));
 }
