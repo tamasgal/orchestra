@@ -19,12 +19,17 @@ RM = /bin/rm -f
 
 
 BIN_DIR = ./bin
+LIB_DIR = ./lib
 SRC_DIR = ./src
 SRC_TEST_DIR = ./test
 BUILD_DIR = ./build
 SRC_TEST_LIST = $(wildcard $(SRC_TEST_DIR)/test_*.cpp)
 
 .PHONY:  test clean
+
+$(LIB_DIR)/$(PROGNAME).a: $(SRC_DIR)/$(PROGNAME).cpp
+	gcc $(CFLAGS) -c $? -o $(BUILD_DIR)/$(PROGNAME).o
+	ar rcs $@ $(BUILD_DIR)/$(PROGNAME).o
 
 $(BIN_DIR)/$(PROGNAME): $(SRC_DIR)/$(PROGNAME).cpp
 	@echo Nothing to build...
@@ -39,9 +44,10 @@ junit.xml: $(BIN_DIR)/test_$(PROGNAME)
 $(BUILD_DIR)/catch.o: $(SRC_TEST_DIR)/catch.cpp
 	${CC} ${CFLAGS} -c $? -o $@
 
-$(BIN_DIR)/test_$(PROGNAME): $(BUILD_DIR)/catch.o $(SRC_TEST_LIST) 
+$(BIN_DIR)/test_$(PROGNAME): $(BUILD_DIR)/catch.o $(SRC_TEST_LIST) $(LIB_DIR)/$(PROGNAME).a
 	$(CC) $(CFLAGS) $(LIBS) $? -o $@
 
 clean:
 	${RM} ${BIN_DIR}/*
+	${RM} ${LIB_DIR}/*
 	${RM} ${BUILD_DIR}/*.o
