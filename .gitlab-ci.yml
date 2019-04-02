@@ -1,0 +1,9 @@
+image: docker.km3net.de/base/centos-full:7
+
+build:
+    script:
+        - make
+
+test:
+    script:
+        - make test
