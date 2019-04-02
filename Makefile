@@ -9,6 +9,7 @@ ifneq ($(strip $(shell git status --porcelain 2>/dev/null)),)
 endif
 
 CFLAGS = -Wall -std=c++11 \
+	  -fprofile-arcs -ftest-coverage \
 	 -DGIT_VERSION=\"$(GIT_VERSION)\"\
 	 -DGIT_COMMIT=\"$(GIT_COMMIT)\"\
 	 -DGIT_DATE=\"$(GIT_DATE)\"\
